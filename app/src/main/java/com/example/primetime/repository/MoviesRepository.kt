@@ -13,11 +13,11 @@ class MoviesRepository(private  val app: Application, private val moshi:Moshi) {
     val moviesData = MutableLiveData<Movies>()
 
     init {
-        getMoviesData()
+        getMoviesData(R.raw.contents1)
     }
 
-    private fun getMoviesData() {
-        val json = FileHelper.getTextFromResources(app, R.raw.contents1)
+     private fun getMoviesData(resourceId:Int) {
+        val json = FileHelper.getTextFromResources(app,resourceId)
 
         val listType = Types.newParameterizedType(Movies::class.java, Movies::class.java)
         val adapter: JsonAdapter<Movies> = moshi.adapter(listType)
